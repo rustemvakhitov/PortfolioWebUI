@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Project } from '../_models/Project';
 import { Tag } from '../_models/Tag';
+import { ProjectService } from '../_services/ProjectService';
 
 @Component({
   selector: 'app-portfolio',
@@ -9,20 +10,21 @@ import { Tag } from '../_models/Tag';
   templateUrl: './portfolio.component.html',
   styleUrl: './portfolio.component.css'
 })
-export class PortfolioComponent {
+export class PortfolioComponent implements OnInit {
 
-  public project: Project = {
-    id:0,
-    name: 'Sample Project',
-    synopsis:'Project Short Description',
-    description:'we dont have to show it now',
-    projectRepositoryLink:'',
-    pictures: [],
-    tags:[Tag.ANGULAG,Tag.ASWFargate, Tag.DOTNET]
-  }
 
-  constructor(private titleService: Title){
+  projects = {} as Project[];
 
+  constructor(private titleService: Title , private projectService: ProjectService)
+  {
     this.titleService.setTitle('Portfolio');
   }
+
+  
+  ngOnInit(): void 
+  {
+    this.projects = this.projectService.GetProjects();
+  }
+
+  
 }
