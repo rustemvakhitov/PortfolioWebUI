@@ -23,12 +23,14 @@ RUN npm run build --configuration=production
 
 
 # Stage 2: Serve the application using Nginx
-FROM nginx:latest
+FROM nginxinc/nginx-unprivileged:1.21-alpine
 
 # copy out nginx config to override default one
 COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 # Copy built Angular app files to Nginx HTML folder
-COPY --from=build /app/dist/ng-portfilio-web-ui /usr/share/nginx/html
+COPY --from=build /app/dist/ng-portfilio-web-ui/browser /usr/share/nginx/html
+
+
 
 # Expose port 80
 EXPOSE 80
