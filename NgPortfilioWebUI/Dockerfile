@@ -23,7 +23,7 @@ RUN npm run build --configuration=production
 
 
 # Stage 2: Serve the application using Nginx
-FROM nginxinc/nginx-unprivileged:1.21-alpine
+FROM nginx
 
 # copy out nginx config to override default one
 COPY ./nginx.conf /etc/nginx/conf.d/default.conf
@@ -35,17 +35,12 @@ COPY --from=build /app/dist/ng-portfilio-web-ui/browser /usr/share/nginx/html
 # Expose port 80
 EXPOSE 80
 
+CMD ["nginx", "-g", "daemon off;"]
 
 # build Docker Image: docker build -t ng-portfolio-docker-1 .
 # run Docker Container using the image: docker run -d -p 7070:80 ng-portfolio-docker-1
 
 #AWS
-
-
-#my setup for repository
-# test/repository_for_first_steps == full repository name
-# 'test' is namespace
-# 'repository_for_first_steps' repository name withing
 
 #login to ECR
 #Retrieve an authentication token and authenticate your Docker client to your registry. Use the AWS CLI:
