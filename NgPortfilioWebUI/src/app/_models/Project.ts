@@ -7,5 +7,5 @@ export interface Project{
     description:string;
     projectRepositoryLink:string;
     pictures:string[];
-    tags:Tag[];
+    tags:string[]; // tag keys
 }
