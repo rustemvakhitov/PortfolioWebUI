@@ -11,7 +11,10 @@ export class ProjectService{
 
     projects: Project[] = [
         {id: 0, name: "Portfolio Web Site using Angular", 
-            pictures: ["portfolio-image1.png", "diagram1.png", "portfolio-image2.png","portfolio-image3.png", "portfolio-image4.png"], projectRepositoryLink: "https://github.com/rustemvakhitov/PortfolioWebUI", synopsis: "Angular 19 Front-End, .net WebApi, DynamoDB as storage for app data", description: "The main purpose of this project is to show an ability of the developer to implement responsive lightweight Web UI and backend API using specified tech stack and also hosting another portfolio projects that prove dev's expertise in other areas", 
+            pictures: ["portfolio-image1.png", "diagram1.png", "portfolio-image2.png","portfolio-image3.png", "portfolio-image4.png"],
+            projectRepositoryLink: "https://github.com/rustemvakhitov/PortfolioWebUI", 
+            synopsis: "Angular 19 Front-End, .net WebApi, DynamoDB as storage for app data", 
+            description: "The main purpose of this project is to show an ability of the developer to implement responsive lightweight Web UI and backend API using specified tech stack and also hosting another portfolio projects that prove dev's expertise in other areas", 
             tags: ['Angular', 'bootstrap', 'ASW Fargate', 'ASW ECR', 'AWS Elastic Load Balancer','ASW S3', 'DynamoDB', 'AWS Route 53', '.Net']},
         {id: 1, name: "Placeholder for Project #2", pictures: ["image1.png"], projectRepositoryLink: "//www.github.com", synopsis: "short description for Project #2", description: "Descriptuin #2", tags: ['Angular']},
         {id: 2, name: "Placeholder for Project #3", pictures: ["imahe1.png"], projectRepositoryLink: "//www.github.com", synopsis: "short description for Project #2", description: "Description #3", tags: ['.Net']}/*,
