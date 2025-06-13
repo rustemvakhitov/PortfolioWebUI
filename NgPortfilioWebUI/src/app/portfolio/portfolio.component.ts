@@ -23,7 +23,7 @@ export class PortfolioComponent implements OnInit {
   
   ngOnInit(): void 
   {
-    this.projects = this.projectService.GetProjects();
+    this.projectService.GetProjects().subscribe(projects => {this.projects = projects});
   }
 
   

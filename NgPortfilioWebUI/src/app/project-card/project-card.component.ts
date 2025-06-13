@@ -35,37 +35,7 @@ export class ProjectCardComponent {
   }
 
   ngOnInit(): void {
-    //this.GetTags();
     this.tags = this.tagService.GetTags();
   }
 
-  GetTags(): void {
-    var o: Observable<any> = this.tagService.CallApi();
-
-    o.pipe
-      (
-        tap(() => console.log('executed')),
-        map(res => { console.log(res); }),
-        shareReplay()
-      ).subscribe();
-
-    console.log('this.tagService.CallApi().subscribe(res => ');
-
-    //.subscribe(res => 
-    //{
-    //console.log('this.tagService.CallApi().subscribe(res => ');
-
-    /*
-    else
-    {
-      res.forEach((value:Tag) =>
-      {
-        console.log(value);
-      }
-      );
-    }
-      */
-
-    //});
-  }
 }

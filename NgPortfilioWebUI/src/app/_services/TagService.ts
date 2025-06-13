@@ -12,9 +12,8 @@ import { lastValueFrom, Observable } from "rxjs";
 export class TagService
 {
     private httpClient = inject(HttpClient);
-    //private httpResource = inject(httpResource);
     private tags:Map<string, string> = new Map<string, string>;
-    private data:any;
+
     constructor(){
         this.tags = new Map<string, string>();
     };

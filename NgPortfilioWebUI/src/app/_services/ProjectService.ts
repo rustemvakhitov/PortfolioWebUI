@@ -1,46 +1,26 @@
-import { Injectable } from "@angular/core";
+import { inject, Injectable } from "@angular/core";
 import { Project } from "../_models/Project";
 import { Tag } from "../_models/Tag";
+import { lastValueFrom, Observable } from "rxjs";
+import { HttpClient } from "@angular/common/http";
 
 @Injectable({
     providedIn: 'root'
 })
 export class ProjectService{
 
+    private httpClient = inject(HttpClient);
+    projects: Project[] = [];
+    
     constructor(){}
 
-    projects: Project[] = [
-        {id: 0, name: "Portfolio Web Site using Angular", 
-            pictures: ["https://rustemvakhitov-s3-portfolio-project-9843098340243.s3.us-east-2.amazonaws.com/project-NgPortfilioWebUI/portfolio-image1.png", 
-                "https://rustemvakhitov-s3-portfolio-project-9843098340243.s3.us-east-2.amazonaws.com/project-NgPortfilioWebUI/diagram1.png", 
-                "https://rustemvakhitov-s3-portfolio-project-9843098340243.s3.us-east-2.amazonaws.com/project-NgPortfilioWebUI/portfolio-image2.png",
-                "https://rustemvakhitov-s3-portfolio-project-9843098340243.s3.us-east-2.amazonaws.com/project-NgPortfilioWebUI/portfolio-image3.png", 
-                "https://rustemvakhitov-s3-portfolio-project-9843098340243.s3.us-east-2.amazonaws.com/project-NgPortfilioWebUI/portfolio-image4.png"],
-            projectRepositoryLink: "https://github.com/rustemvakhitov/PortfolioWebUI", 
-            synopsis: "Angular 19 Front-End, .net WebApi, DynamoDB as storage for app data", 
-            description: "The main purpose of this project is to show an ability of the developer to implement responsive lightweight Web UI and backend API using specified tech stack and also hosting another portfolio projects that prove dev's expertise in other areas", 
-            tags: ['Angular', 'bootstrap', 'ASW Fargate', 'ASW ECR', 'AWS Elastic Load Balancer','ASW S3', 'DynamoDB', 'AWS Route 53', '.Net']},
-        {id: 1, name: "Placeholder for Project #2", pictures: ["https://rustemvakhitov-s3-portfolio-project-9843098340243.s3.us-east-2.amazonaws.com/project-NgPortfilioWebUI/diagram1.png"], projectRepositoryLink: "//www.github.com", synopsis: "short description for Project #2", description: "Descriptuin #2", tags: ['Angular']},
-        {id: 2, name: "Placeholder for Project #3", pictures: ["https://rustemvakhitov-s3-portfolio-project-9843098340243.s3.us-east-2.amazonaws.com/project-NgPortfilioWebUI/diagram1.png"], projectRepositoryLink: "//www.github.com", synopsis: "short description for Project #2", description: "Description #3", tags: ['.Net']}/*,
-        {id: 3, name: "Web API Project", pictures: [], projectRepositoryLink: "//www.github.com", synopsis: "Web API Project that was developed for a class project.", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", tags: [Tag.DOTNET]},
-        {id: 4, name: "Chrome Extension", pictures: [], projectRepositoryLink: "//www.github.com", synopsis: "Developed a chrome extension that tracks the prices of furniture.", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", tags: [Tag.DOTNET]},
-        {id: 5, name: "Mobile App", pictures: [], projectRepositoryLink: "//www.github.com", synopsis: "Mobile app developed in java that tracks the departure and arrival of trains.", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", tags: [Tag.DOTNET]}*/
-    ];
-
-    GetProjects()
+    GetProjects():Observable<Project[]>
     {
-        return this.projects; // call WebApi
+         return this.httpClient.get<Project[]>("https://net-portfolio-api.rustemvakhitov.com/api/Projects");
     }
 
-    GetProject(id:number):Project
+    GetProject(id:number):Observable<Project>
     {
-        let project = this.projects.find(project => project.id === id);
-        
-        if (project === undefined)
-        {
-            throw new TypeError("there is no project with such ID" + id);
-        }
-
-        return project;
+        return this.httpClient.get<Project>(`https://net-portfolio-api.rustemvakhitov.com/api/Projects/${id}`);
     }
 }
