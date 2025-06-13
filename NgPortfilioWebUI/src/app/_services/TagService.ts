@@ -23,7 +23,7 @@ export class TagService
 
     GetTags(): Map<string, string>
     {
-        if (this.tags.size === 0)
+        if (this.tags.size == 0)
         {
             this.CallApiAWait();
         }
