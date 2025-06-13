@@ -14,6 +14,7 @@ import { ProjectCardComponent } from './project-card/project-card.component';
 import { ModalModule} from 'ngx-bootstrap/modal';
 import { CarouselModule} from 'ngx-bootstrap/carousel';
 import { ProjectModalComponent } from './project-modal/project-modal.component';
+import { provideHttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { ProjectModalComponent } from './project-modal/project-modal.component';
     CarouselModule.forRoot()
   ],
   providers: [
-    provideClientHydration(withEventReplay())
+    provideClientHydration(withEventReplay()),
+    provideHttpClient()
   ],
   bootstrap: [AppComponent]
 })

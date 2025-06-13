@@ -18,7 +18,7 @@ export class Tag
     static readonly AWSRoute53 = new Tag('AWS Route 53', 'orange');
     
 
-    public constructor(private readonly key:string, public readonly color:string)
+    public constructor(public readonly key:string, public readonly color:string)
     {
 
     }

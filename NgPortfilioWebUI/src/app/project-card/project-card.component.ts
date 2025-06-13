@@ -4,6 +4,7 @@ import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { ProjectModalComponent } from '../project-modal/project-modal.component';
 import { Tag } from '../_models/Tag';
 import { TagService } from '../_services/TagService';
+import { Observable } from "rxjs";
 
 @Component({
   selector: 'app-project-card',
@@ -15,8 +16,7 @@ export class ProjectCardComponent {
   @Input() project = {} as Project;
 
   bsModalRef?:BsModalRef;
-
-  tags = {} as Map<string,Tag>;
+  tags = {} as Map<string, string>;
 
   constructor(private modalService: BsModalService, private tagService: TagService)
   {
