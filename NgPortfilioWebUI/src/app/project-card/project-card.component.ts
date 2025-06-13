@@ -4,7 +4,7 @@ import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { ProjectModalComponent } from '../project-modal/project-modal.component';
 import { Tag } from '../_models/Tag';
 import { TagService } from '../_services/TagService';
-import { Observable } from "rxjs";
+import { map, Observable, shareReplay, tap } from "rxjs";
 
 @Component({
   selector: 'app-project-card',
@@ -15,28 +15,57 @@ import { Observable } from "rxjs";
 export class ProjectCardComponent {
   @Input() project = {} as Project;
 
-  bsModalRef?:BsModalRef;
+  bsModalRef?: BsModalRef;
   tags = {} as Map<string, string>;
+  tagsArray = {} as Tag[];
 
-  constructor(private modalService: BsModalService, private tagService: TagService)
-  {
+  constructor(private modalService: BsModalService, private tagService: TagService) {
 
   }
 
-  OpenProjectModal()
-  {
-    const modalOptions:ModalOptions = {
-      class:"modal-lg",
+  OpenProjectModal() {
+    const modalOptions: ModalOptions = {
+      class: "modal-lg",
       initialState: {
-        project:this.project,
-        tags:this.tags
+        project: this.project,
+        tags: this.tags
       }
     };
-    this.bsModalRef = this.modalService.show(ProjectModalComponent,modalOptions);
+    this.bsModalRef = this.modalService.show(ProjectModalComponent, modalOptions);
   }
 
-  ngOnInit(): void 
-  {
+  ngOnInit(): void {
+    //this.GetTags();
     this.tags = this.tagService.GetTags();
+  }
+
+  GetTags(): void {
+    var o: Observable<any> = this.tagService.CallApi();
+
+    o.pipe
+      (
+        tap(() => console.log('executed')),
+        map(res => { console.log(res); }),
+        shareReplay()
+      ).subscribe();
+
+    console.log('this.tagService.CallApi().subscribe(res => ');
+
+    //.subscribe(res => 
+    //{
+    //console.log('this.tagService.CallApi().subscribe(res => ');
+
+    /*
+    else
+    {
+      res.forEach((value:Tag) =>
+      {
+        console.log(value);
+      }
+      );
+    }
+      */
+
+    //});
   }
 }
